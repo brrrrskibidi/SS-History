@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Markdown Viewer — Dark • Red Accent</title>
+  <title>Markdown Viewer — TRON ARES Red</title>
 
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -16,43 +16,52 @@
 
   <style>
     :root{
-      --bg:#0b0c0d;
-      --panel:#0f1113;
-      --muted:#9aa3ac;
+      --bg:#050505;
       --text:#e6eef3;
-      --accent:#e63946;
-      --glass: rgba(255,255,255,0.03);
-      --radius:14px;
+      --muted:#a0a0a0;
+      --accent:#ff003c; /* glowing red */
       --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Segoe UI Mono", "Noto Mono", monospace;
     }
 
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:linear-gradient(180deg,var(--bg),#060607);color:var(--text)}
+    html,body{
+      height:100%;
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      top:0;left:0;right:0;bottom:0;
+      background:repeating-linear-gradient(0deg, transparent, transparent 30px, rgba(255,0,60,0.1) 31px);
+      pointer-events:none;
+    }
 
     .app{display:flex;flex-direction:column;min-height:100vh;padding:28px;gap:18px}
 
-    header{display:flex;align-items:center;gap:14px}
+    header{display:flex;align-items:center;gap:14px;border-bottom:2px solid var(--accent);box-shadow:0 0 15px var(--accent)}
     .logo{display:flex;align-items:center;gap:12px}
-    .logo .icon{width:44px;height:44px;background:linear-gradient(135deg,var(--panel),#111);border-radius:12px;display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,0.6)}
-    h1{font-size:1.05rem;margin:0}
+    .logo .icon{width:44px;height:44px;border:2px solid var(--accent);border-radius:12px;display:grid;place-items:center;box-shadow:0 0 12px var(--accent) inset, 0 0 8px var(--accent)}
+    h1{font-size:1.1rem;margin:0;text-shadow:0 0 6px var(--accent)}
     .subtitle{color:var(--muted);font-size:0.85rem}
 
     .controls{margin-left:auto;display:flex;gap:10px;align-items:center}
-    button, .btn{background:transparent;border:1px solid rgba(255,255,255,0.05);color:var(--text);padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:600}
-    .btn.primary{background:linear-gradient(90deg,var(--accent),#ff6b6b);border:none;color:white}
-    .btn.ghost{background:var(--glass);border:1px solid rgba(255,255,255,0.03)}
+    .btn{background:transparent;border:2px solid var(--accent);color:var(--text);padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:600;box-shadow:0 0 10px var(--accent) inset, 0 0 8px var(--accent);transition:0.2s}
+    .btn:hover{background:rgba(255,0,60,0.1)}
 
-    .panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:var(--radius);padding:14px;box-shadow:0 6px 30px rgba(0,0,0,0.6);min-height:60vh;overflow:auto}
+    .panel{border:2px solid var(--accent);border-radius:14px;padding:20px;box-shadow:0 0 20px var(--accent) inset,0 0 12px var(--accent);min-height:70vh;overflow:auto}
 
-    .preview{overflow:auto;padding:18px;background:transparent;border-radius:10px}
-    .preview h1,.preview h2,.preview h3{color:var(--text)}
+    .preview h1,.preview h2,.preview h3{color:var(--text);text-shadow:0 0 6px var(--accent)}
     .preview p{color:var(--muted);line-height:1.6}
 
-    a{color:var(--accent);text-decoration:underline}
-    pre{background:#071018;padding:12px;border-radius:10px;overflow:auto}
-    code{font-family:var(--mono);}
+    a{color:var(--accent);text-decoration:none;text-shadow:0 0 6px var(--accent)}
+    pre{background:#0b0b0b;padding:12px;border-radius:10px;overflow:auto;border:1px solid var(--accent);box-shadow:0 0 10px var(--accent)}
+    code{font-family:var(--mono)}
 
-    footer{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:0.85rem;padding-top:6px}
+    footer{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:0.85rem;padding-top:10px;border-top:2px solid var(--accent);box-shadow:0 0 12px var(--accent)}
 
     @media (max-width:900px){header{gap:10px}.controls{display:flex;gap:8px}}
   </style>
@@ -61,15 +70,15 @@
   <div class="app">
     <header>
       <div class="logo">
-        <div class="icon"><i class="fas fa-file-lines" style="font-size:20px;color:var(--accent)"></i></div>
+        <div class="icon"><i class="fas fa-bolt" style="font-size:20px;color:var(--accent)"></i></div>
         <div>
-          <h1>Markdown Viewer</h1>
-          <div class="subtitle">Simple • Dark mode • Red accent</div>
+          <h1>TRON ARES Markdown Viewer</h1>
+          <div class="subtitle">Glowing red accents • Dark cyber theme</div>
         </div>
       </div>
 
       <div class="controls">
-        <label class="btn ghost" title="Open .md file">
+        <label class="btn" title="Open .md file">
           <i class="fa-regular fa-folder-open"></i>
           <input id="fileInput" type="file" accept=".md,.markdown,text/markdown" style="display:none">
         </label>
@@ -86,8 +95,8 @@
     </main>
 
     <footer>
-      <div>Made for GitHub Pages • No build step</div>
-      <div>Icons: <i class="fa-solid fa-heart" style="color:var(--accent)"></i></div>
+      <div>Made for GitHub Pages • TRON ARES inspired</div>
+      <div><i class="fa-solid fa-heart" style="color:var(--accent)"></i></div>
     </footer>
   </div>
 
@@ -118,7 +127,7 @@
         .then(r => { if(r.ok) return r.text(); throw new Error('No default markdown found'); })
         .then(text => { render(text); })
         .catch(()=>{
-          render(`# Welcome\n\nNo README.md found in repo root.\n\n- Dark mode with a **red** accent.\n- Syntax highlighting for code blocks.\n\n\n\n\`\`\`js\nconsole.log('Hello world');\n\`\`\``);
+          render(`# Welcome\\n\\nNo README.md found in repo root.\\n\\n- Dark cyber red theme inspired by TRON: ARES.\\n- Syntax highlighting for code blocks.\\n\\n\\n\\n\\`\\`\\`js\\nconsole.log('Hello world');\\n\\`\\`\\``);
         });
     }
 
@@ -136,7 +145,7 @@
     loadDefault();
 
     // Accessibility: allow file input click via wrapper
-    document.querySelector('.btn.ghost').addEventListener('click', ()=>fileInput.click());
+    document.querySelector('.btn').addEventListener('click', ()=>fileInput.click());
   </script>
 </body>
 </html>
