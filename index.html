@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Simple Markdown Viewer — Dark • Red Accent</title>
+  <title>Markdown Viewer — Dark • Red Accent</title>
 
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -42,15 +42,7 @@
     .btn.primary{background:linear-gradient(90deg,var(--accent),#ff6b6b);border:none;color:white}
     .btn.ghost{background:var(--glass);border:1px solid rgba(255,255,255,0.03)}
 
-    main{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch}
-
-    .panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:var(--radius);padding:14px;box-shadow:0 6px 30px rgba(0,0,0,0.6);min-height:60vh;overflow:hidden}
-
-    .editor{display:flex;flex-direction:column;height:100%}
-    textarea{flex:1;background:transparent;border:none;color:var(--text);resize:none;padding:10px;font-family:var(--mono);font-size:0.95rem;outline:none}
-
-    .toolbar{display:flex;gap:8px;align-items:center;padding-bottom:10px}
-    .file-drop{border:2px dashed rgba(255,255,255,0.03);border-radius:10px;padding:8px;text-align:center;color:var(--muted);font-size:0.9rem}
+    .panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:var(--radius);padding:14px;box-shadow:0 6px 30px rgba(0,0,0,0.6);min-height:60vh;overflow:auto}
 
     .preview{overflow:auto;padding:18px;background:transparent;border-radius:10px}
     .preview h1,.preview h2,.preview h3{color:var(--text)}
@@ -62,7 +54,7 @@
 
     footer{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:0.85rem;padding-top:6px}
 
-    @media (max-width:900px){main{grid-template-columns:1fr}header{gap:10px}.controls{display:flex;gap:8px}}
+    @media (max-width:900px){header{gap:10px}.controls{display:flex;gap:8px}}
   </style>
 </head>
 <body>
@@ -81,24 +73,14 @@
           <i class="fa-regular fa-folder-open"></i>
           <input id="fileInput" type="file" accept=".md,.markdown,text/markdown" style="display:none">
         </label>
-        <button id="togglePreview" class="btn">Toggle Preview</button>
-        <button id="clearBtn" class="btn">Clear</button>
-        <a id="downloadBtn" class="btn primary" download="preview.html">Export HTML</a>
+        <button id="reloadDefault" class="btn">Reload Default</button>
       </div>
     </header>
 
     <main>
-      <section class="panel editor">
-        <div class="toolbar">
-          <div class="file-drop" id="dropZone">Drop a .md file or paste markdown here</div>
-          <div style="margin-left:auto;color:var(--muted);font-size:0.85rem">Markdown: GitHub-flavored supported</div>
-        </div>
-        <textarea id="mdInput" placeholder="# Paste or type markdown here\n\nSupports code blocks, tables, lists..."></textarea>
-      </section>
-
       <section class="panel">
         <div class="preview" id="previewArea" aria-live="polite"> 
-          <p style="color:var(--muted)"><i class="fa-regular fa-circle-info"></i> Preview will render here — or click <strong>Export HTML</strong> to grab a standalone HTML file.</p>
+          <p style="color:var(--muted)"><i class="fa-regular fa-circle-info"></i> Preview will render here. By default it shows <strong>README.md</strong> from this repo. You can also upload your own .md file.</p>
         </div>
       </section>
     </main>
@@ -121,69 +103,39 @@
       }
     });
 
-    const mdInput = document.getElementById('mdInput');
     const previewArea = document.getElementById('previewArea');
     const fileInput = document.getElementById('fileInput');
-    const dropZone = document.getElementById('dropZone');
-    const clearBtn = document.getElementById('clearBtn');
-    const toggleBtn = document.getElementById('togglePreview');
-    const downloadBtn = document.getElementById('downloadBtn');
+    const reloadDefaultBtn = document.getElementById('reloadDefault');
 
-    function render(){
-      const md = mdInput.value || '';
+    function render(md){
       const html = marked.parse(md);
       previewArea.innerHTML = html;
-      document.querySelectorAll('#previewArea pre code').forEach((block) => {
-        hljs.highlightElement(block);
-      });
-      const standalone = makeStandalone(html);
-      const blob = new Blob([standalone], {type:'text/html'});
-      downloadBtn.href = URL.createObjectURL(blob);
+      previewArea.querySelectorAll('pre code').forEach((block) => hljs.highlightElement(block));
     }
 
-    function makeStandalone(innerHTML){
-      return `<!doctype html><html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Exported Markdown</title><link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css\"><style>body{background:#0b0c0d;color:#e6eef3;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;margin:30px}a{color:#e63946}pre{background:#071018;padding:12px;border-radius:8px;overflow:auto}</style></head><body>${innerHTML}</body></html>`;
+    function loadDefault(){
+      fetch('README.md')
+        .then(r => { if(r.ok) return r.text(); throw new Error('No default markdown found'); })
+        .then(text => { render(text); })
+        .catch(()=>{
+          render(`# Welcome\n\nNo README.md found in repo root.\n\n- Dark mode with a **red** accent.\n- Syntax highlighting for code blocks.\n\n\n\n\`\`\`js\nconsole.log('Hello world');\n\`\`\``);
+        });
     }
-
-    mdInput.addEventListener('input', debounce(render, 200));
 
     fileInput.addEventListener('change', (e)=>{
       const f = e.target.files[0];
       if (!f) return;
-      readFile(f);
-    });
-
-    dropZone.addEventListener('dragover', (e)=>{e.preventDefault();dropZone.style.borderColor='rgba(255,255,255,0.12)'});
-    dropZone.addEventListener('dragleave', ()=>{dropZone.style.borderColor='rgba(255,255,255,0.03)'});
-    dropZone.addEventListener('drop', (e)=>{e.preventDefault();dropZone.style.borderColor='rgba(255,255,255,0.03)';const f = e.dataTransfer.files[0];if(f) readFile(f)});
-
-    function readFile(file){
       const reader = new FileReader();
-      reader.onload = ()=>{ mdInput.value = reader.result; render(); }
-      reader.readAsText(file);
-    }
-
-    clearBtn.addEventListener('click', ()=>{mdInput.value='';render();});
-    toggleBtn.addEventListener('click', ()=>{ previewArea.style.display = previewArea.style.display === 'none' ? 'block' : 'none'; });
-
-    window.addEventListener('paste', (e)=>{
-      const text = (e.clipboardData || window.clipboardData).getData('text');
-      if (text && text.length>0) {
-        if (document.activeElement !== mdInput){ mdInput.value = text; render(); }
-      }
+      reader.onload = ()=>{ render(reader.result); };
+      reader.readAsText(f);
     });
 
-    function debounce(fn,time){let t;return function(...args){clearTimeout(t);t=setTimeout(()=>fn.apply(this,args),time)}}
+    reloadDefaultBtn.addEventListener('click', loadDefault);
 
-    // Default: try to load README.md in repo root
-    fetch('README.md')
-      .then(r => { if(r.ok) return r.text(); throw new Error('No default markdown found'); })
-      .then(text => { mdInput.value = text; render(); })
-      .catch(()=>{
-        mdInput.value = `# Welcome\n\nPaste or drop your markdown file here, or place a **README.md** in the repo root.\n\n- Dark mode with a **red** accent.\n- Syntax highlighting for code blocks.\n\n\n\n\`\`\`js\nconsole.log('Hello world');\n\`\`\``;
-        render();
-      });
+    // Load default on start
+    loadDefault();
 
+    // Accessibility: allow file input click via wrapper
     document.querySelector('.btn.ghost').addEventListener('click', ()=>fileInput.click());
   </script>
 </body>
