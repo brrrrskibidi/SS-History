@@ -5,7 +5,7 @@
 ### Inference SBQ [5m]
 
 -   **IREEL**
-    -   Inference/Reason - From Source A, I can infer... BECAUSE/AS...
+    -   Inference/Reason - From Source A, I can infer... because/as...
     -   Evidence - The evidence is, "..."
     -   Explanation - This suggests that...
     -   Link - Hence, (link to statement)
@@ -15,10 +15,10 @@
 ### Purpose SBQ [6m]
 
 -   **AuMREEPAO**
-    -   Author/Message/Reason - Source A is by... TO... BECAUSE/AS...
+    -   Author/Message/Reason - Source A is by... TO... because/as...
     -   Evidence - The evidence is, "..."
     -   Explanation - This suggests that...
-    -   Purpose\*/Audience/Outcome - This is to... the AUDIENCE SO THAT...
+    -   Purpose\*/Audience/Outcome - This is to... the (audience) SO THAT...
 -   For the purpose use **PHEMPA**
     -   Persuade/Convince
     -   Highlight
@@ -33,9 +33,8 @@
 
 ### Comparison SBQ [7m]
 
--   **COi4E**
+-   **Oi4E**
 
-    -   P2 ONLY - Contrast - However/Similarly...
     -   Overarching Issue/Criteria - Source A and B are similar in terms of...
     -   Explain (Src A) According to Source A,...
     -   Evidence - The evidence is, "..."
@@ -46,14 +45,13 @@
     -   Reason - different in terms of WHY ...
     -   Impact - different in terms of HOW ...
     -   Perspective - different in terms of people VIEW ...
--   Write 2 C4Es
+-   Write 2 Oi4Es, 1 dif. and 1 sim.
 
 ### Reliability SBQ [7m]
 
--   P1/P2 Source Claim/Cross Reference **SCrE**
+-   P1/P2 Source Claim/Cross Reference **ScRE**
 
-    -   Source Claim - According to Source A,...
-    -   Cross Reference (with source/contextual knowledge) - Source A is reliable because it is supported by...
+    -   Source Claim/Reason - According to Source A,... because...
     -   Evidence - The evidence is, "..."
 
 -   Start of P2:
@@ -71,34 +69,63 @@
 
 -   **StaREE**
 
-    -   Stand/Reason - Source A supports... BECAUSE...
+    -   Stand/Reason - Source A supports... because...
     -   Evidence - The evidence is, "..."
     -   Extension - This is (link to statement) because... by doing this...
 
--   Write 4 SEEs - [8m]
+-   Write 4 StaREEs - [8m]
 -   Bonus + [2m]
-    -   CAP
+    -   CAP (Refer to Reliability section)
     -   Contextual Knowledge
         -   Use 1 source and analyse using your contextual knowledge **AEE**
         -   Analysis
         -   Evidence
         -   Explanation
 
-## Structured Response Question (SRQ) [15m]
+## SOCIAL STUDIES - Structured Response Question (SRQ) [15m]
 
 ### SRQ 6 [7m]
 
 -   **D5E**
-    -   Describe - One reason why... is because.../One way we can... is by...
-    -   5W1H
-    -   Explanation - Because of.../By having...
+    -   Define - One reason why... is because.../One way we can... is by...
+    -   5W1H - Who, what, when, where, why, how
+    -   Explanation - because of.../By having...
+-   Write 2 D5Es
 
 ### SRQ 7 [8m]
 
--   **ReD4E**
+-   P1/P2 **ReD4E**
+
     -   Repeat (Topic sentence) - Repeat question
     -   Define - ... means...
     -   Example - Example
     -   Explain - The evidence is, "..."
     -   Example - Example
     -   Explain - The evidence is, "..."
+
+-   P3 Weighing
+    -   Method 1: Root Cause
+        -   ... is the root cause because...
+        -   Explain
+    -   Method 2: Impact
+        -   ... is more significant in terms of impact because... however,...
+    -   Avoid words like IF or WITHOUT
+
+## HISTORY - Structured Essay Question (SEQ) [20m]
+
+### SEQ [10m]
+
+-   P1 **ReDEE**
+
+    -   Repeat - I agree that... because of... (repeat factor given in question)
+    -   Describe - 5W1H
+    -   Explain - one way
+    -   Explain - another way
+
+-   P2 **ADEE**
+    -   Repeat - However, I disagree that... because of... (use another factor relating to the question)
+    -   Describe - 5W1H
+    -   Explain - one way
+    -   Explain - another way
+-   P3 Weighing
+    -   Refer to SRQ
